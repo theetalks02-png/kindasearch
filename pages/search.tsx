@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type Product = {
   name: string;
@@ -9,10 +9,11 @@ type Product = {
   location: string;
 };
 
+// 샘플 데이터 (나중에 엑셀에서 가져올 예정)
 const sampleData: Product[] = [
-  { name: 'mesh layered scrunch- black', sku: 'SK-', box: 'b5-3', location: '4층 ' },
-  { name: '화이트 티셔츠', sku: 'TP-01234', box: 'B1-1', location: '1열 1층' },
-  { name: '블랙 원피스', sku: 'DR-01999', box: 'B3-2', location: '3열 2층' },
+  { name: 'mesh layered scrunch- black', sku: 'SK-', box: 'b5-3', location: '4층' },
+  { name: 'mesh layered scrunch- white', sku: 'TP-01234', box: 'b5-3', location: '4층' },
+  { name: 'mesh layered scrunch- brown', sku: 'DR-01999', box: 'b5-3', location: '4층' },
   { name: '연보라 니트탑', sku: 'TP-04601', box: 'B2-1', location: '2열 1층' },
 ];
 
@@ -29,6 +30,7 @@ export default function SearchPage() {
     }
   }, [router.query]);
 
+  // 인증 안된 경우
   if (!accessAllowed) {
     return (
       <div style={{ textAlign: 'center', marginTop: '100px', fontSize: '18px' }}>
@@ -39,61 +41,79 @@ export default function SearchPage() {
     );
   }
 
+  // 검색 처리 함수
   const handleSearch = () => {
     const filtered = sampleData.filter((item) =>
-      item.name.includes(keyword) || item.sku.includes(keyword) || item.box.includes(keyword)
+      item.name.includes(keyword) ||
+      item.sku.includes(keyword) ||
+      item.box.includes(keyword)
     );
     setResults(filtered);
   };
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      {/* ✅ 로고 삽입 */}
-      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        <Image
-          src="/logo.png"
-          alt="KINDABABY 로고"
-          width={200}
-          height={50}
-        />
+    <div
+      style={{
+        padding: '2rem',
+        fontFamily: 'sans-serif',
+        maxWidth: '600px',
+        margin: '0 auto',
+      }}
+    >
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <Image src="/logo.png" alt="KINDABABY 로고" width={200} height={40} priority />
       </div>
 
-      <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>🔍 재고 검색</h1>
-      <input
-        type="text"
-        placeholder="제품명, SKU, 박스번호 입력"
-        value={keyword}
-        onChange={(e) => setKeyword(e.target.value)}
-        style={{
-          padding: '8px',
-          fontSize: '16px',
-          width: '300px',
-          marginRight: '8px',
-          border: '1px solid #ccc',
-        }}
-      />
-      <button
-        onClick={handleSearch}
-        style={{
-          padding: '8px 16px',
-          fontSize: '16px',
-          backgroundColor: '#222',
-          color: '#fff',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        검색
-      </button>
+      <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '1rem' }}>🔍 재고 검색</h1>
 
-      <ul style={{ marginTop: '2rem' }}>
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem' }}>
+        <input
+          type="text"
+          placeholder="제품명, SKU, 박스번호 입력"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          style={{
+            padding: '10px',
+            fontSize: '16px',
+            flex: 1,
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+          }}
+        />
+        <button
+          onClick={handleSearch}
+          style={{
+            padding: '10px 16px',
+            fontSize: '16px',
+            backgroundColor: '#222',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          검색
+        </button>
+      </div>
+
+      <ul style={{ paddingLeft: 0, listStyle: 'none' }}>
         {results.length === 0 ? (
           <p style={{ color: '#888' }}>🔎 검색 결과 없음</p>
         ) : (
           results.map((item, i) => (
-            <li key={i} style={{ marginBottom: '1rem' }}>
+            <li
+              key={i}
+              style={{
+                background: '#f9f9f9',
+                padding: '1rem',
+                borderRadius: '8px',
+                marginBottom: '1rem',
+                border: '1px solid #ddd',
+              }}
+            >
               <strong>{item.name}</strong> <br />
-              SKU: {item.sku} | 박스: {item.box} | 위치: {item.location}
+              <span>SKU: {item.sku}</span> <br />
+              <span>📦 박스: {item.box} | 위치: {item.location}</span>
             </li>
           ))
         )}
@@ -101,4 +121,3 @@ export default function SearchPage() {
     </div>
   );
 }
-
