@@ -1,0 +1,57 @@
+/* styles/globals.module.css */
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Pretendard', sans-serif;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.searchBox {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.searchBox input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.searchBox button {
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.resultList {
+  list-style: none;
+  padding: 0;
+}
+
+.resultCard {
+  border: 1px solid #eee;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.empty {
+  color: #aaa;
+  margin-top: 24px;
+}
+
