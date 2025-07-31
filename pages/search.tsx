@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type Product = {
   name: string;
@@ -10,15 +11,13 @@ type Product = {
 
 const sampleData: Product[] = [
   { name: 'mesh layered scrunch- black', sku: 'SK-', box: 'b5-3', location: '4층 ' },
-  { name: 'mesh layered scrunch- white', sku: 'SK', box: 'b5-3', location: '1열 1층' },
+  { name: '화이트 티셔츠', sku: 'TP-01234', box: 'B1-1', location: '1열 1층' },
   { name: '블랙 원피스', sku: 'DR-01999', box: 'B3-2', location: '3열 2층' },
   { name: '연보라 니트탑', sku: 'TP-04601', box: 'B2-1', location: '2열 1층' },
 ];
 
 export default function SearchPage() {
   const router = useRouter();
-
-  // ✅ 모든 hook은 조건문 밖에서 선언
   const [accessAllowed, setAccessAllowed] = useState(false);
   const [keyword, setKeyword] = useState('');
   const [results, setResults] = useState<Product[]>([]);
@@ -30,7 +29,6 @@ export default function SearchPage() {
     }
   }, [router.query]);
 
-  // ✅ 인증 키가 없으면 차단 메시지만 렌더링
   if (!accessAllowed) {
     return (
       <div style={{ textAlign: 'center', marginTop: '100px', fontSize: '18px' }}>
@@ -50,6 +48,11 @@ export default function SearchPage() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      {/* ✅ 로고 추가 */}
+      <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <Image src="/logo.png" alt="KINDABABY Logo" width={180} height={50} priority />
+      </div>
+
       <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>🔍 재고 검색</h1>
       <input
         type="text"
