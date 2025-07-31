@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 
 type Product = {
   name: string;
@@ -48,9 +48,14 @@ export default function SearchPage() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      {/* ✅ 로고 추가 */}
+      {/* ✅ 로고 삽입 */}
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        <Image src="/logo.png" alt="KINDABABY Logo" width={180} height={50} priority />
+        <Image
+          src="/logo.png"
+          alt="KINDABABY 로고"
+          width={200}
+          height={50}
+        />
       </div>
 
       <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>🔍 재고 검색</h1>
