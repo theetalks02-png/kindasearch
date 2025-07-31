@@ -10,7 +10,7 @@ type Product = {
 
 const sampleData: Product[] = [
   { name: 'mesh layered scrunch- black', sku: 'SK-', box: 'b5-3', location: '4층 ' },
-  { name: '화이트 티셔츠', sku: 'TP-01234', box: 'B1-1', location: '1열 1층' },
+  { name: 'mesh layered scrunch- white', sku: 'SK', box: 'b5-3', location: '1열 1층' },
   { name: '블랙 원피스', sku: 'DR-01999', box: 'B3-2', location: '3열 2층' },
   { name: '연보라 니트탑', sku: 'TP-04601', box: 'B2-1', location: '2열 1층' },
 ];
